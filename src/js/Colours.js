@@ -1,6 +1,3 @@
-const colourOptions = [
-    'teal', 'blue', 'darkblue', 'purple', 'red', 'green', 'tangerine'
-]
 const COLOUR_TEAL = '#04c4a9';
 const COLOUR_BLUE = '#0083ee';
 const COLOUR_DARKBLUE = '#191e78';
@@ -16,11 +13,6 @@ const TEXT_LIGHT = '#717b81';
 const TEXT_BRAND = '#E3F4FC';
 const TEXT_BRAND_LIGHT = '#A1D1E6';
 
-const getRandomColour = () => {
-    var index = Math.floor(Math.random() * colourOptions.length);
-    return colourOptions[index];
-}
-
 export {
     COLOUR_TEAL,
     COLOUR_BLUE,
@@ -34,8 +26,5 @@ export {
     TEXT_MID,
     TEXT_LIGHT,
     TEXT_BRAND,
-    TEXT_BRAND_LIGHT,
-
-
-    getRandomColour
+    TEXT_BRAND_LIGHT
 };

@@ -42,7 +42,7 @@ class MovieCard extends Component {
     }
 }
 
-const styles = {
-};
+// const styles = {
+// };
 
 export { MovieCard };

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import {
     POPULAR_LOADED,
     LISTS_LOADED,

@@ -6,13 +6,14 @@ import _ from 'lodash';
 import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 import { safeReadParams, } from '../../helper';
-import { getRandomColour, TEXT_BRAND_LIGHT, TEXT_BRAND } from '../../js';
+import { TEXT_BRAND } from '../../js';
 import { MovieCard } from '../../components';
 
 class Movie extends Component {
     initialState = {
         movieId: safeReadParams(this.props, 'movieId'),
-        obj: {}
+        obj: {},
+        loading: true
     }
 
     state = { ...this.initialState };
@@ -32,9 +33,6 @@ class Movie extends Component {
     }
 
     fetchMovieInfo = async () => {
-        let searchString = encodeURIComponent(this.state.searchInput);
-        searchString = searchString.replace(/%20/g, "+");
-
         let apiUrl = `https://api.themoviedb.org/3/movie/${this.state.movieId}?api_key=6ed12e064b90ae1290fa326ce9e790ff&language=en-US`;
 
         console.log(apiUrl)
@@ -50,7 +48,7 @@ class Movie extends Component {
                 console.log(res.data);
 
                 if (!_.isEmpty(res.data)) {
-                    this.setState({ obj: res.data });
+                    this.setState({ obj: res.data, loading: false });
                 } else {
                     this.setState({ empty: true, loading: false })
                 }
@@ -69,10 +67,14 @@ class Movie extends Component {
     }
 
     renderInfo(data, optionalText) {
-        if (_.isEmpty(this.state.obj) || _.isUndefined(data) || _.isEmpty(data.toString())) {
-            return (
-                <FontAwesome style={styles.spinner} name="spinner fa-pulse fa-fw" />
-            );
+        console.log(data)
+        if (_.isEmpty(this.state.obj) || _.isUndefined(data) || data == null || _.isEmpty(data.toString())) {
+            if (this.state.loading) {
+                return (
+                    <FontAwesome style={styles.spinner} name="spinner fa-pulse fa-fw" />
+                );
+            }
+            return '';
         }
         if (optionalText) {
             return optionalText;
@@ -115,6 +117,11 @@ class Movie extends Component {
     render() {
         return (
             <div className="relative pageContainer jumboBackground">
+
+                <div onClick={() => { window.history.back(); }}>
+                    <FontAwesome style={styles.back} name="arrow-left" />
+                </div>
+
                 {this.state.empty &&
                     <div style={{ display: 'flex', paddingTop: 60, justifyContent: 'center' }}>
                         <div className='generalText mont' style={{ ...styles.listheader, fontSize: 18, marginBottom: 14 }}>
@@ -141,7 +148,7 @@ class Movie extends Component {
                                     {this.renderInfo(this.state.obj.title)}
                                 </div>
                                 <div className='generalText mont text-light' style={styles.goooF}>
-                                    {this.renderInfo(this.state.obj.release_date, moment(this.state.obj.release_date, 'YYYY-MM-DD').format('YYYY'))} - {this.renderInfo(this.state.obj.vote_average, `${Math.floor((this.state.obj.vote_average / 10) * 100)}% User Score`)}
+                                    {this.renderInfo(this.state.obj.release_date, moment(this.state.obj.release_date, 'YYYY-MM-DD').format('YYYY'))}{this.renderInfo(this.state.obj.vote_average, ` - ${Math.floor((this.state.obj.vote_average / 10) * 100)}% User Score`)}
                                 </div>
                                 <div className='generalText mont text-light' style={styles.goooF}>
                                     {this.renderInfo(this.state.obj.runtime, this.timeConvert(this.state.obj.runtime))}
@@ -159,6 +166,16 @@ class Movie extends Component {
 }
 
 const styles = {
+    back: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        padding: 15,
+        fontSize: 18,
+        zIndex: 10,
+        color: '#fff',
+        cursor: 'pointer'
+    },
     topInfo: {
         display: 'block',
         paddingLeft: 156 + 18,

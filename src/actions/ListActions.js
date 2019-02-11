@@ -1,5 +1,6 @@
 import {
-    LISTS_LOADED
+    LISTS_LOADED,
+    POPULAR_LOADED
 } from './types';
 // import Cookies from 'js-cookie';
 
@@ -9,3 +10,11 @@ export const loadLists = (data) => {
         payload: data
     };
 };
+
+export const loadPop = (data) => {
+    return {
+        type: POPULAR_LOADED,
+        payload: data
+    };
+};
+

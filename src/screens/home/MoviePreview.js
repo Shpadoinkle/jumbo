@@ -48,8 +48,8 @@ class MoviePreview extends Component {
     }
 }
 
-const styles = {
+// const styles = {
 
-}
+// }
 
 export default connect(null, {})(withRouter(MoviePreview));
