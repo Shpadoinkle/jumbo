@@ -1,0 +1,4 @@
+export const GENERAL_RESET = 'GENERAL_RESET';
+
+export const POPULAR_LOADED = 'POPULAR_LOADED';
+export const LISTS_LOADED = 'LISTS_LOADED';

@@ -64,6 +64,9 @@ body {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 .movie-p-rating {
   padding: 3px 9px;
@@ -100,6 +103,9 @@ body {
   width: 100%;
   height: 245px;
   background-color: #A1D1E6;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .resultsContainer {
   display: flex;
