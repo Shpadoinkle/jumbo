@@ -26,8 +26,13 @@ class Movie extends Component {
     }
 
     fetchMovieFromReducer() {
-        const movieObj = _.find(this.props.list, (t) => { return t.id.toString() === this.state.movieId.toString(); });
-        if (!_.isEmpty(movieObj)) {
+        let movieObj = _.find(this.props.list, (t) => { return t.id.toString() === this.state.movieId.toString(); });
+        if (_.isEmpty(movieObj)) {
+            movieObj = _.find(this.props.pop, (t) => { return t.id.toString() === this.state.movieId.toString(); });
+            if (!_.isEmpty(movieObj)) {
+                this.setState({ obj: movieObj });
+            }
+        } else {
             this.setState({ obj: movieObj });
         }
     }
@@ -35,8 +40,6 @@ class Movie extends Component {
     fetchMovieInfo = async () => {
         let apiUrl = `https://api.themoviedb.org/3/movie/${this.state.movieId}?api_key=6ed12e064b90ae1290fa326ce9e790ff&language=en-US`;
 
-        console.log(apiUrl)
-        console.log('fetching??......');
         this.setState({ empty: false });
 
         axios({
@@ -44,9 +47,6 @@ class Movie extends Component {
             url: apiUrl,
         })
             .then((res) => {
-                console.log('test results....')
-                console.log(res.data);
-
                 if (!_.isEmpty(res.data)) {
                     this.setState({ obj: res.data, loading: false });
                 } else {
@@ -116,7 +116,7 @@ class Movie extends Component {
 
     render() {
         return (
-            <div className="relative pageContainer jumboBackground">
+            <div className="relative pageContainer jumboBackground" style={styles.overlay}>
 
                 <div onClick={() => { window.history.back(); }}>
                     <FontAwesome style={styles.back} name="arrow-left" />
@@ -166,6 +166,15 @@ class Movie extends Component {
 }
 
 const styles = {
+    overlay: {
+        position: 'fixed',
+        zIndex: 100,
+        top: 0,
+        left: 0,
+        height: '100vh',
+        width: '100vw',
+        overflow: 'auto'
+    },
     back: {
         position: 'fixed',
         top: 0,
@@ -207,8 +216,10 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
+    const { list } = state;
     return {
-        list: state.list.list
+        pop: list.popular,
+        list: list.list
     };
 };
 

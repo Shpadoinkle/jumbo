@@ -34,7 +34,7 @@ class App extends Component {
         <Router onUpdate={() => window.scrollTo(0, 0)}>
           <div>
             <ScrollToTop />
-            <Route path="/" exact component={HomeSearch} />
+            <Route path="/" component={HomeSearch} />
             <Route path="/movie/:movieId" exact component={Movie} />
           </div>
         </Router>

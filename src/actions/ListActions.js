@@ -1,6 +1,6 @@
 import {
     LISTS_LOADED,
-    POPULAR_LOADED
+    POPULAR_LOADED,
 } from './types';
 // import Cookies from 'js-cookie';
 
@@ -17,4 +17,3 @@ export const loadPop = (data) => {
         payload: data
     };
 };
-
