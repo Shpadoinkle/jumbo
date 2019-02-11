@@ -156,7 +156,7 @@ class Movie extends Component {
                                 movie={this.state.obj}
                             />
                         </div>
-                        <div style={{ paddingLeft: 20, paddingRight: 20 }}>
+                        <div style={{ paddingLeft: 20, paddingRight: 20, paddingBottom: 40 }}>
                             <div style={styles.topInfo}>
                                 <div className='generalText mont' style={styles.listheader}>
                                     {this.renderInfo(this.state.obj.title)}
