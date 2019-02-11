@@ -29,7 +29,7 @@ class MovieCard extends Component {
 
     render() {
         return (
-            <div className='movie-p-top' style={{ ...this.props.style, backgroundImage: this.getBackImage() }}>
+            <div className={`movie-p-top${this.props.small ? ' movie-p-top-small' : ''}`} style={{ ...this.props.style, backgroundImage: this.getBackImage() }}>
                 {this.props.hasRating &&
                     <div className='movie-p-rating'>
                         <div className='movie-p-rating--text'>

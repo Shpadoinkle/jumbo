@@ -32,6 +32,7 @@ class MoviePreview extends Component {
         return (
             <div className='movie-p' onClick={() => { this.goToMovie() }}>
                 <MovieCard
+                    small
                     hasRating
                     movie={this.state.obj}
                 />
