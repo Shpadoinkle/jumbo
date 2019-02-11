@@ -80,6 +80,13 @@ body {
     color: @TEXT_BRAND;
 }
 
+.fontHeavy() {
+    font-family: 'Roboto', serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+}
+
 .generalText {
     .generalText();
 }
@@ -220,6 +227,16 @@ body {
     background-position: center;
     background-size: cover;
     background-image: url('https://www.themoviedb.org/assets/1/v4/logos/312x276-primary-green-74212f6247252a023be0f02a5a45794925c3689117da9d20ffe47742a665c518.png')
+}
+
+.tag {
+    background-color: @TEXT_BRAND_MID;
+    color: #081b23;
+    .fontHeavy();
+    padding: 5px 10px;
+    border-radius: 30px;
+    margin-right: 6px;
+    margin-bottom: 6px;
 }
 
 @media only screen and (max-width: 600px) {

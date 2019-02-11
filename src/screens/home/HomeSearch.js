@@ -75,8 +75,8 @@ class HomeSearch extends Component {
             url: apiUrl,
         })
             .then((res) => {
-                console.log('results....')
-                console.log(res.data.results);
+                // console.log('results....')
+                // console.log(res.data.results);
                 if (isPop) {
                     this.props.loadPop(res.data.results);
                     this.setState({

@@ -48,6 +48,7 @@ class Movie extends Component {
         })
             .then((res) => {
                 if (!_.isEmpty(res.data)) {
+                    // console.log(res.data)
                     this.setState({ obj: res.data, loading: false });
                 } else {
                     this.setState({ empty: true, loading: false })
@@ -67,7 +68,6 @@ class Movie extends Component {
     }
 
     renderInfo(data, optionalText) {
-        console.log(data)
         if (_.isEmpty(this.state.obj) || _.isUndefined(data) || data == null || _.isEmpty(data.toString())) {
             if (this.state.loading) {
                 return (
@@ -114,6 +114,20 @@ class Movie extends Component {
         return `${rhours}h ${rminutes} min`;
     }
 
+    renderTags() {
+        if (_.isEmpty(this.state.obj) || _.isEmpty(this.state.obj.genres)) {
+            return null;
+        }
+        return _.map(this.state.obj.genres, (t, index) => {
+            if (t == null) {
+                return null;
+            }
+            return (<div key={index} className='tag'>
+                {t.name}
+            </div>);
+        });
+    }
+
     render() {
         return (
             <div className="relative pageContainer jumboBackground" style={styles.overlay}>
@@ -153,6 +167,9 @@ class Movie extends Component {
                                 <div className='generalText mont text-light' style={styles.goooF}>
                                     {this.renderInfo(this.state.obj.runtime, this.timeConvert(this.state.obj.runtime))}
                                 </div>
+                                <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap' }}>
+                                    {this.renderTags()}
+                                </div>
                             </div>
                             <div style={styles.bottomInfo}>
                                 {this.renderBottom()}
@@ -190,6 +207,7 @@ const styles = {
         paddingLeft: 156 + 18,
         paddingTop: 18,
         minHeight: 175,
+        paddingBottom: 8,
         borderBottom: `1px #9FBBC7 solid`
     },
     listheader: {
