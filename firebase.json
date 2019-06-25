@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "thoash-jumbo",
     "public": "build",
     "ignore": [
       "firebase.json",
