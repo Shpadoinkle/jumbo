@@ -1,12 +1,8 @@
 {
   "hosting": {
-    "site": "thoash-jumbo",
+    "site": "thoash-moviedb",
     "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
